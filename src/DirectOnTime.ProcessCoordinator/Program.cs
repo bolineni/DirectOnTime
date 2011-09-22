@@ -52,11 +52,11 @@ namespace DirectOnTime.ProcessCoordinator {
 
         private static void DisplayStateMachine() {
             Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
-            //StateMachineInspector.Trace(new Proc);
+            StateMachineInspector.Trace(new ProcessOrchestrationSaga(CombGuid.Generate()));
         }
 
         private static IContainer BootStrapContainer() {
-            //var container = new Container(x => x.AddType(typeof(ProcessCoordinatorService)));
+            
             var container =
                 new Container(x => x.For<ProcessCoordinatorService>()
                                     .LifecycleIs(new SingletonLifecycle())
