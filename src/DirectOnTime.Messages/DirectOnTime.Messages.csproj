@@ -39,8 +39,15 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Inbound\EndorsementBusinessCompleteMessage.cs" />
+    <Compile Include="Inbound\MonthlyPaymentCompleteMessage.cs" />
+    <Compile Include="Inbound\NewBusinessCompleteMessage.cs" />
+    <Compile Include="OutBound\FinishMonthlyPaymentProcessorMessage.cs" />
+    <Compile Include="OutBound\StartMonthlyPaymentProcessorMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Inbound\RenewalBusinessCompleteMessage.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
