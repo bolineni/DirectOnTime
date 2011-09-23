@@ -1,11 +1,4 @@
-Design
-========
 
-With Overline, for parts
-########################
-
-With Overline, for Chapters
-***************************
 
 For Section
 ===========
