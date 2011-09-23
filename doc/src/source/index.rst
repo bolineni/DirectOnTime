@@ -10,6 +10,11 @@ Contents:
 
 .. toctree::
    :maxdepth: 2
+   
+   configuration/index.rst
+   overview/index.rst
+   design/index.rst
+   troubleshooting/index.rst
 
 Indices and tables
 ==================
