@@ -12,13 +12,14 @@
 namespace DirectOnTime.ProcessCoordinator {
     using MassTransit;
     using MassTransit.Saga;
-
+    using log4net;
 
     public class ProcessCoordinatorService {
-        private IServiceBus _bus;
-        private ISagaRepository<ProcessOrchestrationSaga> _sagaRepository;
+        
+        private readonly IServiceBus _bus;
+        private readonly ISagaRepository<ProcessOrchestrationSaga> _sagaRepository;
         private UnsubscribeAction _unsubscribeAction;
-
+        private readonly ILog _log = LogManager.GetLogger(typeof (ProcessCoordinatorService));
 
         public ProcessCoordinatorService(IServiceBus bus, ISagaRepository<ProcessOrchestrationSaga> sagaRepository) {
             _bus = bus;
@@ -27,7 +28,7 @@ namespace DirectOnTime.ProcessCoordinator {
 
         public void Start()
         {
-            _unsubscribeAction = _bus.SubscribeSaga(_sagaRepository);
+          //  _unsubscribeAction = _bus.SubscribeSaga(_sagaRepository);
         }
 
 

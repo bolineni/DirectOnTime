@@ -11,6 +11,10 @@
 
 namespace DirectOnTime.Messages.Inbound
 {
+    using System;
+    using MassTransit;
+
+    [Serializable]
     public class EndorsementBusinessCompleteMessage
     {
          

@@ -11,8 +11,12 @@
 
 namespace DirectOnTime.Messages.OutBound
 {
-    public class FinishMonthlyPaymentProcessorMessage
+    using System;
+    using MassTransit;
+
+    [Serializable]
+    public class FinishMonthlyPaymentProcessorMessage : CorrelatedBy<Guid>
     {
-         
+        public Guid CorrelationId { get; set; }
     }
 }

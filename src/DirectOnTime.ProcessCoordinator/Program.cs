@@ -21,7 +21,7 @@ namespace DirectOnTime.ProcessCoordinator {
     using Topshelf;
     using StructureMap;
     using MassTransit;
-    using MassTransit.StructureMapIntegration;
+
 
     internal static class Program {
         /// <summary>
@@ -30,7 +30,8 @@ namespace DirectOnTime.ProcessCoordinator {
         /// <param name="args"></param>
         [STAThread]
         private static void Main(string[] args) {
-            XmlConfigurator.Configure(new FileInfo("processcoordinator.log4net.xml"));
+
+            XmlConfigurator.ConfigureAndWatch(new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "processcoordinator.log4net.xml"));
             var container = BootStrapContainer();
             HostFactory.Run(c => {
                 c.SetServiceName("DirectOnTime.ProcessCoordinator");
@@ -44,7 +45,7 @@ namespace DirectOnTime.ProcessCoordinator {
                     s.WhenStarted(o => o.Start());
                     s.WhenStopped(o => {
                         o.Stop();
-                        container.Dispose();
+                        //container.Dispose();
                     });
                 });
             });
@@ -56,12 +57,13 @@ namespace DirectOnTime.ProcessCoordinator {
         }
 
         private static IContainer BootStrapContainer() {
-            
+
             var container =
                 new Container(x => x.For<ProcessCoordinatorService>()
                                     .LifecycleIs(new SingletonLifecycle())
                                     .Use<ProcessCoordinatorService>());
 
+            //container.Configure( cfg => cfg.For<ProcessOrchestrationSaga>());
             container.Configure(cfg => cfg.For<IServiceBus>()
                                            .LifecycleIs(new SingletonLifecycle())
                                            .Use(context => ServiceBusFactory.New(sbc => {
@@ -69,17 +71,13 @@ namespace DirectOnTime.ProcessCoordinator {
                                                    "rabbitmq://localhost/DirectOnTime_ProcessCoordinator");
                                                sbc.UseRabbitMq();
                                                sbc.UseRabbitMqRouting();
-                                               sbc.UseControlBus();
-                                               sbc.Subscribe(
-                                                   subs =>
-                                                   subs.LoadFrom(container));
+                                               sbc.Subscribe(subs=> { subs.LoadFrom(container);});
                                            }
                                                                )));
-            container.Configure(cfg => cfg.For(typeof(ISagaRepository<>))
+            container.Configure(cfg => cfg.For(typeof(ISagaRepository<ProcessOrchestrationSaga>))
                 .LifecycleIs(new SingletonLifecycle())
-                .Use(typeof(InMemorySagaRepository<>))
+                .Use(typeof(InMemorySagaRepository<ProcessOrchestrationSaga>))
                 );
-
             return container;
         }
     }

@@ -16,8 +16,12 @@ namespace DirectOnTime.ProcessCoordinator {
     using Magnum.StateMachine;
     using Messages.Inbound;
     using Messages.OutBound;
+    using log4net;
 
-    public class ProcessOrchestrationSaga : SagaStateMachine<ProcessOrchestrationSaga>, ISaga {
+    public class ProcessOrchestrationSaga : SagaStateMachine<ProcessOrchestrationSaga>, ISaga
+    {
+
+        private readonly ILog _log = LogManager.GetLogger(typeof (ProcessOrchestrationSaga));
         public IServiceBus Bus { get; set; }
         public Guid CorrelationId { get; set; }
 
@@ -29,9 +33,9 @@ namespace DirectOnTime.ProcessCoordinator {
 
         // Define Saga Events - Initiating Events.
         public static Event<MonthlyPaymentCompleteMessage> NewMonthlyPaymentRecevied { get; set; }
-        public static Event<NewBusinessCompleteMessage> NewBusinessTransactionReceived { get; set; }
-        public static Event<EndorsementBusinessCompleteMessage> EndorsementTransactionReceived { get; set; }
-        public static Event<RenewalBusinessCompleteMessage> RenewalTransactionReceived { get; set; }
+        //public static Event<NewBusinessCompleteMessage> NewBusinessTransactionReceived { get; set; }
+        //public static Event<EndorsementBusinessCompleteMessage> EndorsementTransactionReceived { get; set; }
+        //public static Event<RenewalBusinessCompleteMessage> RenewalTransactionReceived { get; set; }
 
         // Closing Events ....
         public static Event<FinishMonthlyPaymentProcessorMessage> PaymentProcessorCompleted { get; set; }
@@ -62,10 +66,14 @@ namespace DirectOnTime.ProcessCoordinator {
         }
 
         public void InitiateMonthlyPaymentProcessing(MonthlyPaymentCompleteMessage message) {
+            Console.WriteLine("Thios is a test");
 
         }
 
         public void CloseMonthlyPaymentProcessing() {
+            Console.WriteLine("Montly Payment Processing is now completed.");
+            //_log.Error(string.Format("'{0}' threw an exception publishing message '{1}'",
+            //    consumer.GetType().FullName, message.GetType().FullName), ex);
         }
 
 
