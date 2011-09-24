@@ -64,20 +64,25 @@ namespace DirectOnTime.ProcessCoordinator {
                                     .Use<ProcessCoordinatorService>());
 
             //container.Configure( cfg => cfg.For<ProcessOrchestrationSaga>());
+            container.Configure(cfg => cfg.For(typeof(ISagaRepository<ProcessOrchestrationSaga>))
+                .LifecycleIs(new SingletonLifecycle())
+                .Use(typeof(InMemorySagaRepository<ProcessOrchestrationSaga>))
+                );
+
+            container.Configure(x=> x.For<ProcessOrchestrationSaga>()
+                .Use<ProcessOrchestrationSaga>());
+            
             container.Configure(cfg => cfg.For<IServiceBus>()
                                            .LifecycleIs(new SingletonLifecycle())
                                            .Use(context => ServiceBusFactory.New(sbc => {
                                                sbc.ReceiveFrom(
-                                                   "rabbitmq://localhost/DirectOnTime_ProcessCoordinator");
+                                                   "rabbitmq://localhost/ProcessCoordinator");
                                                sbc.UseRabbitMq();
                                                sbc.UseRabbitMqRouting();
                                                sbc.Subscribe(subs=> { subs.LoadFrom(container);});
                                            }
                                                                )));
-            container.Configure(cfg => cfg.For(typeof(ISagaRepository<ProcessOrchestrationSaga>))
-                .LifecycleIs(new SingletonLifecycle())
-                .Use(typeof(InMemorySagaRepository<ProcessOrchestrationSaga>))
-                );
+            
             return container;
         }
     }
