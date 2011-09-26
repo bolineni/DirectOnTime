@@ -7,7 +7,7 @@ One of the major open source components utilized in the design & development of 
 
 Why MassTransit?
 ================
-MassTransit is a lean framework for creating distributed applications on the .Net platform. MassTransit provides the ability to subscribe messages by type and then connect different processing nodes through messaging at the same time building mesh of services.
+'MassTransit <http://masstransit-project.com/>'_ is a lean framework for creating distributed applications on the .Net platform. MassTransit provides the ability to subscribe messages by type and then connect different processing nodes through messaging at the same time building mesh of services.
 
 MassTransit designed to be used inside the firewall, and not as a means to communicate with the external vendors or interfaces. Because of this, it becomes a great choice to build and orchestrate the internal business, at the same time ahering to the great principles of EIP.
 
