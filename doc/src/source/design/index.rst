@@ -42,14 +42,14 @@ Message Oriented Integration works effectively when we can design the applicatio
 Saga design should be done with care. It is better to have a saga be in a wait state for more than it is meaningfully required. For example if your business process takes more than a day to complete, try to see whether the business process can be divided in to two different integration tasks rather than two steps in the same saga. Saga's are clearly meant for coordinating long running processes but long is always a question. In my point of view if the process run takes more than 12 hours to finish, then better divide in to multiple integration processes rather than looking at as two different steps.
 
 Direct OnTime - Application Design
-----------------------------------
+==================================
 The following sections shall describe the general priciples, functions and responsibilities of various elements within Direct OnTime application stack.
 
 .. toctree::
 
-    Process Coordinator.rst
-	Monthly Payment Processor.rst
-	New Business Processor.rst
+    ProcessCoordinator.rst
+	MonthlyPaymentProcessor.rst
+	NewBusinessProcessor.rst
 
 
 
