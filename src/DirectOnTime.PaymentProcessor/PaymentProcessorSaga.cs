@@ -54,12 +54,10 @@ namespace DirectOnTime.PaymentProcessor {
                                 .Then((saga, message) => saga.BeginPaymentProcessing(message))
                                 .TransitionTo(WaitingForLoadPaymentDataMessage)
                                 );
-
                             During(WaitingForLoadPaymentDataMessage,
                                 When(LoadPaymentDataMessageReceived)
                                 .Then((saga, message) => saga.LoadPaymentDataProcessing(message))
                                 .TransitionTo(WaitingForPostPaymentDataMessage)
-                                //.Complete()
                                 );
                             During(WaitingForPostPaymentDataMessage,
                                 When(PostPaymentDataMessageReceived)
