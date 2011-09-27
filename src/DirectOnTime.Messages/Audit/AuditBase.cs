@@ -3,6 +3,7 @@
 namespace DirectOnTime.Messages.Audit
 {
     using System;
+    [Serializable]
     public abstract class AuditBase : IAudit
     {
         public Guid MessageId { get; set; }

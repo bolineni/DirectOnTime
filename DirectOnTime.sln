@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransit.Transports.Rabb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectOnTime.Messages", "src\DirectOnTime.Messages\DirectOnTime.Messages.csproj", "{8F7913ED-1FDE-4801-AD88-9C87097BC0DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectOnTime.ProcessCoordinator", "src\DirectOnTime.ProcessCoordinator\DirectOnTime.ProcessCoordinator.csproj", "{35F96AEE-BBE1-4FAB-A414-411677BDD0A0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectOnTime.PaymentProcessor", "src\DirectOnTime.PaymentProcessor\DirectOnTime.PaymentProcessor.csproj", "{5C8C4038-315E-432C-B1C1-7B6E4D62354D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectOnTime.Infrastructure", "src\DirectOnTime.Infrastructure\DirectOnTime.Infrastructure.csproj", "{BC6171D5-12BD-4005-8C04-303EFF31FBE7}"
@@ -91,16 +89,6 @@ Global
 		{8F7913ED-1FDE-4801-AD88-9C87097BC0DF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{8F7913ED-1FDE-4801-AD88-9C87097BC0DF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{8F7913ED-1FDE-4801-AD88-9C87097BC0DF}.Release|x86.ActiveCfg = Release|Any CPU
-		{35F96AEE-BBE1-4FAB-A414-411677BDD0A0}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{35F96AEE-BBE1-4FAB-A414-411677BDD0A0}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{35F96AEE-BBE1-4FAB-A414-411677BDD0A0}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{35F96AEE-BBE1-4FAB-A414-411677BDD0A0}.Debug|x86.ActiveCfg = Debug|x86
-		{35F96AEE-BBE1-4FAB-A414-411677BDD0A0}.Debug|x86.Build.0 = Debug|x86
-		{35F96AEE-BBE1-4FAB-A414-411677BDD0A0}.Release|Any CPU.ActiveCfg = Release|x86
-		{35F96AEE-BBE1-4FAB-A414-411677BDD0A0}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{35F96AEE-BBE1-4FAB-A414-411677BDD0A0}.Release|Mixed Platforms.Build.0 = Release|x86
-		{35F96AEE-BBE1-4FAB-A414-411677BDD0A0}.Release|x86.ActiveCfg = Release|x86
-		{35F96AEE-BBE1-4FAB-A414-411677BDD0A0}.Release|x86.Build.0 = Release|x86
 		{5C8C4038-315E-432C-B1C1-7B6E4D62354D}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{5C8C4038-315E-432C-B1C1-7B6E4D62354D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{5C8C4038-315E-432C-B1C1-7B6E4D62354D}.Debug|Mixed Platforms.Build.0 = Debug|x86

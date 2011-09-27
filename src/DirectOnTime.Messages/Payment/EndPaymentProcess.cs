@@ -1,7 +1,17 @@
 ﻿namespace DirectOnTime.Messages.Payment
 {
-    public class EndPaymentProcess : PaymentBase
+    using System;
+    using MassTransit;
+
+    [Serializable]
+    public class EndPaymentProcess : CorrelatedBy<Guid>, IPayment
     {
+        public Guid CorrelationId { get; set; }
+        public Guid MessageId { get; set; }
+        public string BusinessUnit { get; set; }
+        public string UserName { get; set; }
+        public string RequestTime { get; set; }
+        public string ReceiptId { get; set; }
          
     }
 }

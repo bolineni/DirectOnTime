@@ -7,7 +7,7 @@ namespace DirectOnTime.IntegrationTestFrame {
     using MassTransit;
     using StructureMap;
     using StructureMap.Pipeline;
-    using DirectOnTime.Messages.Inbound;
+    using Messages.Payment;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -25,10 +25,9 @@ namespace DirectOnTime.IntegrationTestFrame {
         {
 
             string clientId = txtClientId.Text;
-            var message = new MonthlyPaymentCompleteMessage
+            var message = new BeginPaymentProcess()
                               {
-                                  CorrelationId = Guid.NewGuid(),
-                                  ClientId = clientId,
+                                  MessageId = Guid.NewGuid(),
                                   BusinessUnit = "2009",
                                   ReceiptId = "RCPT10000011",
                                   UserName = "PGSKR"
