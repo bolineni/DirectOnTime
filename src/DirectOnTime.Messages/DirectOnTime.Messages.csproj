@@ -37,6 +37,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Audit\AuditBase.cs" />
+    <Compile Include="Audit\AuditBegin.cs" />
+    <Compile Include="Audit\AuditEnd.cs" />
+    <Compile Include="Audit\AuditInProcess.cs" />
     <Compile Include="Audit\IAudit.cs" />
     <Compile Include="Audit\Payment\BeginPaymentAudit.cs" />
     <Compile Include="Audit\Payment\EndPaymentAudit.cs" />
@@ -45,6 +48,7 @@
     <Compile Include="IMessage.cs" />
     <Compile Include="Payment\BeginPaymentProcess.cs" />
     <Compile Include="Payment\EndPaymentProcess.cs" />
+    <Compile Include="Payment\InitPaymentProcess.cs" />
     <Compile Include="Payment\IPayment.cs" />
     <Compile Include="Payment\LoadPaymentData.cs" />
     <Compile Include="Payment\PostPaymentData.cs" />

@@ -25,7 +25,7 @@ namespace DirectOnTime.IntegrationTestFrame {
         {
 
             string clientId = txtClientId.Text;
-            var message = new BeginPaymentProcess()
+            var message = new InitPaymentProcess()
                               {
                                   MessageId = Guid.NewGuid(),
                                   BusinessUnit = "2009",

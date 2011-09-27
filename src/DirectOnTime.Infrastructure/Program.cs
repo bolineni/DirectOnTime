@@ -12,8 +12,7 @@
 namespace DirectOnTime.Infrastructure {
     using System;
     using System.IO;
-    using System.Diagnostics;
-
+    
     using MassTransit;
     using StructureMap;
     using StructureMap.Pipeline;
@@ -22,8 +21,7 @@ namespace DirectOnTime.Infrastructure {
 
     using Messages.Audit;
     using Messages.Audit.Payment;
-
-
+    
     internal static class Program {
         [STAThread]
         private static void Main(string[] args) {

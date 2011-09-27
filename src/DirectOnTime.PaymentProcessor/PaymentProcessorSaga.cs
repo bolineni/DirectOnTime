@@ -21,8 +21,7 @@ namespace DirectOnTime.PaymentProcessor {
     using Messages.Payment;
     using Messages.Audit.Payment;
 
-    public class PaymentProcessorSaga : SagaStateMachine<PaymentProcessorSaga>, ISaga 
-    {
+    public class PaymentProcessorSaga : SagaStateMachine<PaymentProcessorSaga>, ISaga {
         private readonly ILog _log = LogManager.GetLogger(typeof(PaymentProcessorSaga));
 
         public IServiceBus Bus { get; set; }
@@ -30,12 +29,14 @@ namespace DirectOnTime.PaymentProcessor {
 
         // Define Saga Events
         public static State Initial { get; set; }
+        public static State WaitingForBeginPaymentProcessMessage { get; set; }
         public static State WaitingForLoadPaymentDataMessage { get; set; }
         public static State WaitingForPostPaymentDataMessage { get; set; }
         public static State WaitingForEndPaymentProcessMessage { get; set; }
         public static State Completed { get; set; }
 
         // Define saga Evenets / Transitions
+        public static Event<InitPaymentProcess> InitPaymentProcessMessageReceived { get; set; }
         public static Event<BeginPaymentProcess> BeginPaymentProcessMessageReceived { get; set; }
         public static Event<LoadPaymentData> LoadPaymentDataMessageReceived { get; set; }
         public static Event<PostPaymentData> PostPaymentDataMessageReceived { get; set; }
@@ -48,28 +49,37 @@ namespace DirectOnTime.PaymentProcessor {
 
         static PaymentProcessorSaga() {
             Define(() => {
-                            Initially(
-                                When(BeginPaymentProcessMessageReceived)
-                                .Then((saga, message) => saga.BeginPaymentProcessing(message))
-                                .TransitionTo(WaitingForLoadPaymentDataMessage)
-                                );
-                            During(WaitingForLoadPaymentDataMessage,
-                                When(LoadPaymentDataMessageReceived)
-                                .Then((saga, message) => saga.LoadPaymentDataProcessing(message))
-                                .TransitionTo(WaitingForPostPaymentDataMessage)
-                                );
-                            During(WaitingForPostPaymentDataMessage,
-                                When(PostPaymentDataMessageReceived)
-                                .Then((saga, message) => saga.PostPaymentDataProcessing(message))
-                                .TransitionTo(WaitingForEndPaymentProcessMessage)
-                                );
-                            During(WaitingForEndPaymentProcessMessage,
-                                When(EndPaymentProcessMessageReceived)
-                                .Then((saga, message) => saga.EndPaymentProcessing(message))
-                                .Complete()
-                                );
-                        });
+                Initially(
+                        When(InitPaymentProcessMessageReceived)
+                            .Then((saga, message) => saga.InitializePaymentProcessing(message))
+                            .TransitionTo(WaitingForBeginPaymentProcessMessage)
+                    );
+                During(WaitingForBeginPaymentProcessMessage,
+                        When(BeginPaymentProcessMessageReceived)
+                            .Then((saga, message) => saga.BeginPaymentProcessing(message))
+                            .TransitionTo(WaitingForLoadPaymentDataMessage)
+                    );
+                During(WaitingForLoadPaymentDataMessage,
+                    When(LoadPaymentDataMessageReceived)
+                        .Then((saga, message) => saga.LoadPaymentDataProcessing(message))
+                        .TransitionTo(WaitingForPostPaymentDataMessage)
+                    );
+                During(WaitingForPostPaymentDataMessage,
+                    When(PostPaymentDataMessageReceived)
+                        .Then((saga, message) => saga.PostPaymentDataProcessing(message))
+                        .TransitionTo(WaitingForEndPaymentProcessMessage)
+                    );
+                During(WaitingForEndPaymentProcessMessage,
+                    When(EndPaymentProcessMessageReceived)
+                        .Then((saga, message) => saga.EndPaymentProcessing(message))
+                        .Complete()
+                    );
+            });
+        }
 
+        public void InitializePaymentProcessing(InitPaymentProcess message) {
+            this.Bus.Publish(new BeginPaymentProcess());
+            // also publish the audit if required.
         }
 
         public void BeginPaymentProcessing(BeginPaymentProcess message) {
