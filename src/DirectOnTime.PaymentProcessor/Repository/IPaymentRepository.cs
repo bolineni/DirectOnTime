@@ -5,16 +5,13 @@
 // without the prior written consent of the copyright owner.
 //  
 // SolutionName : DirectOnTime
-// Project/Filename: DirectOnTime.Messages / EndPaymentAudit.cs
-// Created By (Date): Shibu K. Raj - {pgskr} (27/09/2011 9:00 AM)
-// Last Modified By (Date) : Shibu K. Raj - {pgskr} (27/09/2011 10:00 AM)
+// Project/Filename: DirectOnTime.PaymentProcessor / IPaymentRepository.cs
+// Created By (Date): Shibu K. Raj - {pgskr} (27/09/2011 1:31 PM)
+// Last Modified By (Date) : Shibu K. Raj - {pgskr} (27/09/2011 1:31 PM)
 
-namespace DirectOnTime.Messages.Audit.Payment
+namespace DirectOnTime.PaymentProcessor.Repository
 {
-    using System;
-
-    [Serializable]
-    public class EndPaymentAudit : AuditBase
+    public interface IPaymentRepository
     {
          
     }

@@ -9,7 +9,6 @@
 // Created By (Date): Shibu K. Raj - {pgskr} (26/09/2011 5:29 PM)
 // Last Modified By (Date) : Shibu K. Raj - {pgskr} (26/09/2011 5:29 PM)
 
-using System;
 
 namespace DirectOnTime.PaymentProcessor {
     using System;

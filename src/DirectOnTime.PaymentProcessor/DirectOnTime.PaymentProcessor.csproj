@@ -56,6 +56,8 @@
     <Compile Include="PaymentProcessorService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IPaymentRepository.cs" />
+    <Compile Include="Repository\PaymentRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -87,6 +89,10 @@
       <Project>{8F7913ED-1FDE-4801-AD88-9C87097BC0DF}</Project>
       <Name>DirectOnTime.Messages</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Facade\" />
+    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
