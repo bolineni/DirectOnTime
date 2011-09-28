@@ -13,12 +13,10 @@ namespace DirectOnTime.Messages.Audit
 {
     public class AuditInProcess : AuditBase
     {
-
         public AuditInProcess()
         {
             this.AuditStatus = "In Process";
         }
         public string AuditStatus { get; private set; }
-        public string AuditMessage { get; set; }
     }
 }

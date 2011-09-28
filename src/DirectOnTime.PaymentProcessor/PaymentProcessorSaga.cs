@@ -19,7 +19,7 @@ namespace DirectOnTime.PaymentProcessor {
     using log4net;
 
     using Messages.Payment;
-    using Messages.Audit.Payment;
+    using Messages.Audit;
 
     public class PaymentProcessorSaga : SagaStateMachine<PaymentProcessorSaga>, ISaga {
         private readonly ILog _log = LogManager.GetLogger(typeof(PaymentProcessorSaga));
@@ -78,32 +78,111 @@ namespace DirectOnTime.PaymentProcessor {
         }
 
         public void InitializePaymentProcessing(InitPaymentProcess message) {
+            // publish begin Audit
+            this.Bus.Publish(
+                new AuditBegin {
+                    CorrelationId = message.CorrelationId,
+                    BusinessUnit = message.BusinessUnit,
+                    UserName = message.UserName,
+                    MessageId = new Guid(),
+                    RequestTime = DateTime.Now.ToShortDateString(),
+                    AuditMessage = "Init Payment Processes  Step Started ..... "
+                });
+            //TODO -- Do the processing here ..
             this.Bus.Publish(new BeginPaymentProcess());
-            // also publish the audit if required.
+            this.Bus.Publish(
+                    new AuditEnd {
+                        CorrelationId = message.CorrelationId,
+                        BusinessUnit = message.BusinessUnit,
+                        UserName = message.UserName,
+                        MessageId = new Guid(),
+                        RequestTime = DateTime.Now.ToShortDateString(),
+                        AuditMessage = "Init Payment Process Step Completed Sucessfully .... "
+                    });
         }
 
         public void BeginPaymentProcessing(BeginPaymentProcess message) {
-            // First Publish the Audit Messages.
-            this.Bus.Publish(new BeginPaymentAudit());
-            // Pubslish the Load Payment Data Message.
+
+            this.Bus.Publish(
+                new AuditBegin {
+                    CorrelationId = message.CorrelationId,
+                    BusinessUnit = message.BusinessUnit,
+                    UserName = message.UserName,
+                    MessageId = new Guid(),
+                    RequestTime = DateTime.Now.ToShortDateString(),
+                    AuditMessage = "Begin Payment Processing Step Started ....."
+                });
+            //TODO -- Do the processing here ..
             this.Bus.Publish(new LoadPaymentData());
+            this.Bus.Publish(
+                   new AuditEnd {
+                       CorrelationId = message.CorrelationId,
+                       BusinessUnit = message.BusinessUnit,
+                       UserName = message.UserName,
+                       MessageId = new Guid(),
+                       RequestTime = DateTime.Now.ToShortDateString(),
+                       AuditMessage = "Begin Payment Process Step Completed Sucessfully ...."
+                   });
         }
 
         public void LoadPaymentDataProcessing(LoadPaymentData message) {
-            this.Bus.Publish(new LoadPaymentAudit());
-            //TODO  Do the business action here.
+
+            this.Bus.Publish(
+                new AuditBegin {
+                    CorrelationId = message.CorrelationId,
+                    BusinessUnit = message.BusinessUnit,
+                    UserName = message.UserName,
+                    MessageId = new Guid(),
+                    RequestTime = DateTime.Now.ToShortDateString(),
+                    AuditMessage = "Load Payment  Data Processing Step Started ....."
+                });
+            //TODO -- Do the processing here ..
             this.Bus.Publish(new PostPaymentData());
+            this.Bus.Publish(
+                   new AuditEnd {
+                       CorrelationId = message.CorrelationId,
+                       BusinessUnit = message.BusinessUnit,
+                       UserName = message.UserName,
+                       MessageId = new Guid(),
+                       RequestTime = DateTime.Now.ToShortDateString(),
+                       AuditMessage = "Load Payment Data Processing Step Completed Sucessfully ...."
+                   });
 
         }
 
         public void PostPaymentDataProcessing(PostPaymentData message) {
-            this.Bus.Publish(new PostPaymentAudit());
-            // Do the business process here
+            this.Bus.Publish(
+                new AuditBegin {
+                    CorrelationId = message.CorrelationId,
+                    BusinessUnit = message.BusinessUnit,
+                    UserName = message.UserName,
+                    MessageId = new Guid(),
+                    RequestTime = DateTime.Now.ToShortDateString(),
+                    AuditMessage = "Post Payment  Data Processing Step Started ....."
+                });
+            //TODO Do the business process here
             this.Bus.Publish(new EndPaymentProcess());
+            this.Bus.Publish(
+                   new AuditEnd {
+                       CorrelationId = message.CorrelationId,
+                       BusinessUnit = message.BusinessUnit,
+                       UserName = message.UserName,
+                       MessageId = new Guid(),
+                       RequestTime = DateTime.Now.ToShortDateString(),
+                       AuditMessage = "Post Payment Data Processing Step Completed Sucessfully ...."
+                   });
         }
 
         public void EndPaymentProcessing(EndPaymentProcess message) {
-            this.Bus.Publish(new EndPaymentAudit());
+            this.Bus.Publish(
+                   new AuditEnd {
+                       CorrelationId = message.CorrelationId,
+                       BusinessUnit = message.BusinessUnit,
+                       UserName = message.UserName,
+                       MessageId = new Guid(),
+                       RequestTime = DateTime.Now.ToShortDateString(),
+                       AuditMessage = "Payment Processing - All Steps Completed Sucessfully"
+                   });
             // Notify any one about the completion - if required.
         }
     }

@@ -18,6 +18,5 @@ namespace DirectOnTime.Messages.Audit
             this.AuditStatus = "Start";
         }
         public string AuditStatus { get; private set; }
-        public string AuditMessage { get; set; }
     }
 }

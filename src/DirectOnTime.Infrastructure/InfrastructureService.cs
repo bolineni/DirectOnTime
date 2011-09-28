@@ -13,7 +13,10 @@ namespace DirectOnTime.Infrastructure {
     using MassTransit;
     using log4net;
 
-    public class InfrastructureService {
+    using Messages.Audit;
+    
+
+    public class InfrastructureService : Consumes<IAudit>.All {
         private readonly IServiceBus _bus;
         private UnsubscribeAction _unsubscribe;
 
@@ -29,6 +32,10 @@ namespace DirectOnTime.Infrastructure {
         public void Stop() {
             _unsubscribe();
             _bus.Dispose();
+        }
+
+        public void Consume(IAudit message) {
+            new AuditMessageProcessor<IAudit>().ProcessMessage(message);
         }
     }
 }

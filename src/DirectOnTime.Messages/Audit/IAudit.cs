@@ -11,11 +11,10 @@
 
 namespace DirectOnTime.Messages.Audit
 {
+    using System;
+
     public interface IAudit : IMessage
     {
-        string ClientId { get; set; }
-        string CompnayNumber { get; set; }
-        string PolicyPrefix { get; set; }
-        string PolicySequenceNumber { get; set; }
+        Guid CorrelationId { get; set; }
     }
 }

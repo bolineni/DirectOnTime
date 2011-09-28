@@ -12,7 +12,7 @@
 namespace DirectOnTime.Infrastructure {
     using System;
     using System.IO;
-    
+
     using MassTransit;
     using StructureMap;
     using StructureMap.Pipeline;
@@ -20,8 +20,8 @@ namespace DirectOnTime.Infrastructure {
     using Topshelf;
 
     using Messages.Audit;
-    using Messages.Audit.Payment;
-    
+
+
     internal static class Program {
         [STAThread]
         private static void Main(string[] args) {
@@ -33,28 +33,32 @@ namespace DirectOnTime.Infrastructure {
                 c.SetDescription("Real Time - Infrascture Service");
                 c.RunAsLocalSystem();
                 c.Service<InfrastructureService>(s => {
-                                                         s.ConstructUsing(
-                                                             builder =>
-                                                             container.GetInstance
-                                                                 <InfrastructureService>());
-                                                         s.WhenStarted(o => o.Start());
-                                                         s.WhenStopped(o => o.Stop());
-                                                     });
+                    s.ConstructUsing(
+                        builder =>
+                        container.GetInstance
+                            <InfrastructureService>());
+                    s.WhenStarted(o => o.Start());
+                    s.WhenStopped(o => o.Stop());
+                });
             });
         }
 
         private static IContainer BootStrapContainer() {
             var container = new Container();
 
+            // container.Configure(x=> x.For<>());
+            container.Configure(x => x.For<InfrastructureService>()
+                .Use<InfrastructureService>());
+
             // Configure the service bus.
             container.Configure(cfg => cfg.For<IServiceBus>()
                 .LifecycleIs(new SingletonLifecycle())
                 .Use(context => ServiceBusFactory.New(sbc => {
-                                                             sbc.ReceiveFrom("");
-                                                             sbc.UseRabbitMq();
-                                                             sbc.UseRabbitMqRouting();
-                                                             sbc.Subscribe(subs => subs.LoadFrom(container));
-                                                         })));
+                    sbc.ReceiveFrom("rabbitmq://localhost/Audit");
+                    sbc.UseRabbitMq();
+                    sbc.UseRabbitMqRouting();
+                    sbc.Subscribe(subs => subs.LoadFrom(container));
+                })));
             return container;
         }
     }

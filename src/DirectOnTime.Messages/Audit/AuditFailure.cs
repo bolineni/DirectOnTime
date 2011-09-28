@@ -5,17 +5,18 @@
 // without the prior written consent of the copyright owner.
 //  
 // SolutionName : DirectOnTime
-// Project/Filename: DirectOnTime.Messages / AuditEnd.cs
-// Created By (Date): Shibu K. Raj - {pgskr} (27/09/2011 3:16 PM)
-// Last Modified By (Date) : Shibu K. Raj - {pgskr} (27/09/2011 3:16 PM)
+// Project/Filename: DirectOnTime.Messages / AuditFailure.cs
+// Created By (Date): Shibu K. Raj - {pgskr} (28/09/2011 9:27 AM)
+// Last Modified By (Date) : Shibu K. Raj - {pgskr} (28/09/2011 9:27 AM)
 
 namespace DirectOnTime.Messages.Audit
 {
-    public class AuditEnd : AuditBase
+    public class AuditFailure : AuditBase
     {
-        public AuditEnd()
+
+        public AuditFailure()
         {
-            this.AuditStatus = "End";
+            this.AuditStatus = "Failed";
         }
         public string AuditStatus { get; private set; }
     }
