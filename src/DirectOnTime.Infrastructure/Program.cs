@@ -46,10 +46,20 @@ namespace DirectOnTime.Infrastructure {
         private static IContainer BootStrapContainer() {
             var container = new Container();
 
-            // container.Configure(x=> x.For<>());
+            
             container.Configure(x => x.For<InfrastructureService>()
                 .Use<InfrastructureService>());
 
+            container.Configure(x=>x.Scan(s=>
+                                              {
+                                                  s.Assembly("Microsoft.Practices.EnterpriseLibrary.Data");
+                                                  s.AddAllTypesOf(
+                                                      typeof (Microsoft.Practices.EnterpriseLibrary.Data.Database));
+                                              }));
+
+            container.Configure(x=> x.For<Microsoft.Practices.EnterpriseLibrary.Data.Database>()
+                .Use<Microsoft.Practices.EnterpriseLibrary.Data.Database>());
+           
             // Configure the service bus.
             container.Configure(cfg => cfg.For<IServiceBus>()
                 .LifecycleIs(new SingletonLifecycle())

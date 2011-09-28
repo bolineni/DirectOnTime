@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectOnTime.IntegrationTestFrame", "src\DirectOnTime.IntegrationTestFrame\DirectOnTime.IntegrationTestFrame.csproj", "{4B555515-B6D9-42D6-AC70-F409503EA7DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectOnTime.InfrastructureUnitTest", "src\DirectOnTime.InfrastructureUnitTest\DirectOnTime.InfrastructureUnitTest.csproj", "{F59241CB-B593-4998-89C1-CB80F062F3BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -119,6 +121,16 @@ Global
 		{4B555515-B6D9-42D6-AC70-F409503EA7DB}.Release|Mixed Platforms.Build.0 = Release|x86
 		{4B555515-B6D9-42D6-AC70-F409503EA7DB}.Release|x86.ActiveCfg = Release|x86
 		{4B555515-B6D9-42D6-AC70-F409503EA7DB}.Release|x86.Build.0 = Release|x86
+		{F59241CB-B593-4998-89C1-CB80F062F3BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F59241CB-B593-4998-89C1-CB80F062F3BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F59241CB-B593-4998-89C1-CB80F062F3BF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F59241CB-B593-4998-89C1-CB80F062F3BF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F59241CB-B593-4998-89C1-CB80F062F3BF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F59241CB-B593-4998-89C1-CB80F062F3BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F59241CB-B593-4998-89C1-CB80F062F3BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F59241CB-B593-4998-89C1-CB80F062F3BF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F59241CB-B593-4998-89C1-CB80F062F3BF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F59241CB-B593-4998-89C1-CB80F062F3BF}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,6 +142,7 @@ Global
 		{6C7149D7-4D97-45DF-A05D-61EC7374491D} = {18B5D25D-3F7F-43FE-894E-F3FEE4B9ACE1}
 		{0C426771-EFF8-416E-A9F8-451BCD0CC61F} = {6EE1EBB7-1580-43B4-A4FA-409CF72A4F35}
 		{46A8449B-D008-4003-BDC9-54EB1AD480CE} = {6EE1EBB7-1580-43B4-A4FA-409CF72A4F35}
+		{F59241CB-B593-4998-89C1-CB80F062F3BF} = {0C426771-EFF8-416E-A9F8-451BCD0CC61F}
 		{4B555515-B6D9-42D6-AC70-F409503EA7DB} = {46A8449B-D008-4003-BDC9-54EB1AD480CE}
 	EndGlobalSection
 EndGlobal
