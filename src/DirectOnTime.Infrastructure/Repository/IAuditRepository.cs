@@ -12,10 +12,11 @@
 namespace DirectOnTime.Infrastructure.Repository
 {
     using Model;
-    public interface IAuditRepository
+    public interface IAuditRepository<T>
+        where T : class
     {
-        // Fetch Process Header.
-        ProcessHeader GetProcessHeader(string clientId);
-
+        void Add(T entity);
+        T GetByMessageId(string messageId);
+        T GetByCorrelationId(string correlationId);
     }
 }
